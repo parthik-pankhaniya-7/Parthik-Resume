@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parthik Pankhaniya — .NET Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:   #07080A;
+  --black2:  #0F1114;
+  --black3:  #171A1F;
+  --black4:  #1E2128;
+  --lime:    #C6FF33;
+  --lime-dim:#8DB324;
+  --lime-bg: rgba(198,255,51,0.06);
+  --lime-bd: rgba(198,255,51,0.15);
+  --white:   #F0F2F5;
+  --muted:   #6B7280;
+  --dimmed:  #374151;
+  --border:  #1E2128;
+  --border2: #252A33;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─── PAGE ─────────────────────────────────── */
+.page { max-width: 960px; margin: 0 auto; }
+
+/* ─── HEADER ───────────────────────────────── */
+.hdr {
+  padding: 3rem 3.5rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hdr::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--border2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border2) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.35;
+  pointer-events:none;
+}
+
+.hdr::after {
+  content:'';
+  position:absolute;
+  top:-80px; right:60px;
+  width:320px; height:320px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(198,255,51,0.09) 0%, transparent 68%);
+  pointer-events:none;
+}
+
+.hdr-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.badge-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--lime-bg);
+  border: 1px solid var(--lime-bd);
+  border-radius: 100px;
+  padding: 4px 12px 4px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--lime);
+  letter-spacing: 0.05em;
+}
+
+.pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 0 rgba(198,255,51,0.6);
+  animation: ping 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 rgba(198,255,51,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(198,255,51,0); }
+  100% { box-shadow: 0 0 0 0 rgba(198,255,51,0); }
+}
+
+.role-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 3px 9px;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 8vw, 4.2rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+}
+
+h1 .accent { color: var(--lime); }
+
+.tagline {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 1.6rem;
+}
+
+.contact-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+}
+
+.c-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  transition: color .2s;
+}
+.c-link:hover { color: var(--lime); }
+.c-link svg { width:13px; height:13px; flex-shrink:0; }
+
+/* STATS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  margin-top: 2.5rem;
+}
+
+.stat {
+  padding: 1.4rem 1.6rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--lime);
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── BODY ──────────────────────────────────── */
+.body {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+}
+
+.main { padding: 2.5rem 2.8rem 3rem 3.5rem; border-right: 1px solid var(--border); }
+.side { padding: 2.5rem 2.5rem 3rem 2rem; }
+
+/* ─── SECTION ───────────────────────────────── */
+.sec { margin-bottom: 2.8rem; }
+.sec:last-child { margin-bottom: 0; }
+
+.sec-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-title::after { content:''; flex:1; height:1px; background:var(--border2); }
+
+/* ─── EXP CARD ───────────────────────────────── */
+.exp {
+  background: var(--black2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.exp:hover { border-color: var(--lime-bd); }
+
+.exp.current::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width:3px;
+  background: var(--lime);
+  border-radius:3px 0 0 3px;
+}
+
+.exp-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.exp-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.exp-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--lime);
+  background: var(--lime-bg);
+  border: 1px solid var(--lime-bd);
+  border-radius: 100px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.exp-period.past {
+  color: var(--muted);
+  background: transparent;
+  border-color: var(--border2);
+}
+
+.exp-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.exp-meta a:hover { color: var(--lime); }
+.dot-sep { color: var(--dimmed); }
+
+.exp-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exp-list li {
+  font-size: 12.5px;
+  color: #8B95A3;
+  padding-left: 1.1rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.exp-list li::before {
+  content: '▸';
+  position: absolute; left:0;
+  color: var(--lime);
+  font-size: 10px;
+  top: 3px;
+}
+
+.hl { color: var(--white); font-weight: 500; }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 1rem;
+}
+
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border2);
+  color: var(--dimmed);
+  background: var(--black3);
+  letter-spacing: 0.04em;
+}
+
+.chip.lime {
+  color: var(--lime);
+  border-color: var(--lime-bd);
+  background: var(--lime-bg);
+}
+
+/* ─── EDU ────────────────────────────────────── */
+.edu {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--black2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.edu-deg {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.edu-school { font-size: 11.5px; color: var(--muted); }
+.edu-right { text-align: right; flex-shrink:0; }
+.edu-cgpa {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--lime);
+  display: block;
+}
+.edu-yr { font-size: 10px; color: var(--dimmed); font-family: 'JetBrains Mono', monospace; }
+
+/* ─── SKILLS ─────────────────────────────────── */
+.skill-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.skill-name { font-size: 12px; color: #9CA3AF; min-width: 85px; }
+.skill-track {
+  flex:1; height:2px;
+  background: var(--black4);
+  border-radius: 2px;
+  overflow:hidden;
+}
+.skill-fill {
+  height:100%;
+  border-radius:2px;
+  background: var(--lime);
+}
+.skill-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: var(--dimmed);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ─── CERT ───────────────────────────────────── */
+.cert {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  margin-bottom: 0.5rem;
+  background: var(--black2);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  transition: border-color .2s;
+}
+.cert:hover { border-color: var(--lime-bd); }
+.cert-icon {
+  width: 28px; height: 28px; flex-shrink:0;
+  background: var(--lime-bg);
+  border: 1px solid var(--lime-bd);
+  border-radius: 6px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 12px;
+}
+.cert-name { font-size: 11.5px; font-weight: 500; color: var(--white); line-height: 1.4; margin-bottom:2px; }
+.cert-by { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* ─── AWARD ──────────────────────────────────── */
+.award {
+  background: linear-gradient(135deg, rgba(255,196,0,0.05) 0%, transparent 80%);
+  border: 1px solid rgba(255,196,0,0.15);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 0.7rem;
+}
+.award-top {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 5px;
+}
+.award-icon { font-size: 16px; }
+.award-name { font-size: 12px; font-weight: 600; color: #F9C74F; }
+.award-meta { font-size: 10px; color: var(--muted); font-family:'JetBrains Mono',monospace; margin-bottom:5px; }
+.award-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+/* ─── INTERESTS ──────────────────────────────── */
+.tags { display:flex; flex-wrap:wrap; gap:5px; }
+.tag {
+  font-size: 10.5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  background: var(--black3);
+}
+
+/* ════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+════════════════════════════════ */
+
+/* ─── TABLET (≤ 768px) ────────── */
+@media (max-width: 768px) {
+  .hdr { padding: 2rem 1.5rem 1.8rem; }
+
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    padding: 2rem 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .side { padding: 2rem 1.5rem; }
+
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .stat { padding: 1rem 1rem; }
+
+  .contact-strip { gap: 0.5rem 1.2rem; }
+}
+
+/* ─── MOBILE (≤ 480px) ────────── */
+@media (max-width: 480px) {
+  .hdr { padding: 1.4rem 1.1rem 1.4rem; }
+  .hdr::after { display: none; }
+
+  h1 { font-size: clamp(2rem, 11vw, 2.8rem); margin-bottom: 0.9rem; }
+
+  .tagline { font-size: 12px; margin-bottom: 1.2rem; }
+
+  .badge-row { gap: 7px; margin-bottom: 0.8rem; }
+  .status-badge { font-size: 9px; padding: 3px 10px 3px 7px; }
+  .role-tag { font-size: 9px; padding: 2px 7px; }
+
+  .contact-strip { gap: 0.4rem 1rem; }
+  .c-link { font-size: 9.5px; }
+
+  /* stats — stack 2+1 on very small screens */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat:last-child {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+  .stat { padding: 0.9rem 1rem; }
+  .stat-num { font-size: 1.7rem; }
+  .stat-label { font-size: 10px; }
+
+  .main { padding: 1.4rem 1.1rem 1.8rem; }
+  .side { padding: 1.4rem 1.1rem 1.8rem; }
+
+  /* experience cards */
+  .exp { padding: 1.1rem 1rem; }
+  .exp-top { flex-direction: column; gap: 5px; align-items: flex-start; }
+  .exp-title { font-size: 14px; }
+  .exp-meta { font-size: 11px; gap: 4px; }
+  .exp-list li { font-size: 12px; }
+
+  /* edu */
+  .edu { flex-direction: column; gap: 6px; }
+  .edu-right { text-align: left; }
+
+  /* certs */
+  .cert { padding: 0.7rem 0.8rem; }
+  .cert-name { font-size: 11px; }
+
+  /* skills */
+  .skill-name { font-size: 11px; min-width: 75px; }
+
+  /* section title */
+  .sec-title { font-size: 9px; letter-spacing: 0.18em; }
+
+  /* chips */
+  .chip { font-size: 9px; padding: 2px 7px; }
+}
+
+/* ─── PRINT ──────────────────────────────────── */
+@media print {
+  body { background:#fff; color:#111; }
+  :root {
+    --black:#fff; --black2:#f8f9fa; --black3:#f0f1f2; --black4:#e8e9ea;
+    --white:#111; --muted:#555; --dimmed:#888;
+    --border:#ddd; --border2:#e0e0e0;
+    --lime:#3a7d00; --lime-bg:rgba(58,125,0,0.05); --lime-bd:rgba(58,125,0,0.2);
+  }
+  .hdr::before, .hdr::after { display:none; }
+  .body { grid-template-columns: 1fr 260px; }
+  .main { padding: 2rem 2rem 2rem 2.5rem; border-right: 1px solid var(--border); border-bottom: none; }
+  .side { padding: 2rem 2rem 2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════ HEADER ══════════════════════ -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="badge-row">
+      <div class="status-badge">
+        <span class="pulse"></span>
+        Available for opportunities
+      </div>
+      <div class="role-tag">.NET Developer</div>
+    </div>
+
+    <h1>Parthik<br><span class="accent">Pankhaniya</span></h1>
+
+    <p class="tagline">
+      Full-stack .NET developer with 3+ years crafting scalable web applications,
+      RESTful APIs, and AI-powered integrations — currently building global software
+      solutions at Niotechone for clients across India, USA &amp; Canada.
+    </p>
+
+    <div class="contact-strip">
+      <a class="c-link" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Rajkot, Gujarat, IN
+      </a>
+      <a class="c-link" href="mailto:parthikpk0001@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        parthikpk0001@gmail.com
+      </a>
+      <a class="c-link" href="tel:+918780506484">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.28 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 87805 06484
+      </a>
+      <a class="c-link" href="https://www.linkedin.com/in/parthik-pankhaniya/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin/parthik-pankhaniya
+      </a>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">11+</div>
+      <div class="stat-label">Projects Shipped</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Companies</div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════ BODY ══════════════════════ -->
+<div class="body">
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <div class="sec">
+      <div class="sec-title">Work Experience</div>
+
+      <div class="exp current">
+        <div class="exp-top">
+          <div class="exp-title">.NET Developer</div>
+          <div class="exp-period">Jul 2025 — Present</div>
+        </div>
+        <div class="exp-meta">
+          <a href="https://niotechone.com" target="_blank">Niotechone Software Solution Pvt. Ltd.</a>
+          <span class="dot-sep">·</span>
+          Rajkot
+          <span class="dot-sep">·</span>
+          Full-time
+        </div>
+        <ul class="exp-list">
+          <li>Developing <span class="hl">custom web applications &amp; APIs</span> for global clients across USA, Dubai, Canada and India.</li>
+          <li>Building and consuming <span class="hl">RESTful APIs</span> using ASP.NET Core, delivering scalable backend architectures.</li>
+          <li>Collaborating within cross-functional Agile teams to deliver <span class="hl">full-stack solutions</span> with tight sprint cycles and continuous delivery pipelines.</li>
+          <li>Applying <span class="hl">Entity Framework Core</span> and SQL Server optimizations to handle high-throughput data operations for enterprise clients.</li>
+          <li>Participating in code reviews and enforcing engineering best practices across the team.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip lime">C#</span>
+          <span class="chip lime">ASP.NET Core</span>
+          <span class="chip lime">EF Core</span>
+          <span class="chip lime">SQL Server</span>
+          <span class="chip lime">REST API</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Agile</span>
+          <span class="chip">Git</span>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-top">
+          <div class="exp-title">.NET Developer</div>
+          <div class="exp-period past">Apr 2024 — Jul 2025</div>
+        </div>
+        <div class="exp-meta">
+          <a href="https://infibrain.com" target="_blank">Infibrain Technologies LLP</a>
+          <span class="dot-sep">·</span>
+          Rajkot
+          <span class="dot-sep">·</span>
+          1 yr 4 mos
+        </div>
+        <ul class="exp-list">
+          <li>Architected and shipped <span class="hl">8 client-facing web applications</span> end-to-end using ASP.NET Core MVC, with 3 more currently in active development.</li>
+          <li>Integrated <span class="hl">Razorpay, Stripe &amp; PayPal</span> payment gateways enabling secure, PCI-compliant transaction flows.</li>
+          <li>Implemented <span class="hl">ChatGPT API</span> to power AI-driven conversational features, significantly increasing user engagement metrics.</li>
+          <li>Connected <span class="hl">WhatsApp Business API</span>, SMS gateways, and email platforms into unified notification pipelines.</li>
+          <li>Designed optimized <span class="hl">SQL Server schemas</span> with indexing strategies and stored procedures, improving query performance across high-load apps.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">C#</span>
+          <span class="chip">ASP.NET Core MVC</span>
+          <span class="chip">EF Core</span>
+          <span class="chip">SQL Server</span>
+          <span class="chip">ChatGPT API</span>
+          <span class="chip">Razorpay</span>
+          <span class="chip">WhatsApp API</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">LINQ</span>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-top">
+          <div class="exp-title">Jr. .NET Developer</div>
+          <div class="exp-period past">Feb 2023 — Apr 2024</div>
+        </div>
+        <div class="exp-meta">
+          <a href="https://ashokinfotech.in" target="_blank">Ashok Infotech</a>
+          <span class="dot-sep">·</span>
+          Ahmedabad
+          <span class="dot-sep">·</span>
+          1 yr 3 mos
+        </div>
+        <ul class="exp-list">
+          <li>Built a strong foundation in <span class="hl">C#, .NET Core, and MVC</span> architecture through structured mentorship and live project exposure.</li>
+          <li>Developed and maintained RESTful APIs integrated into production web-based systems.</li>
+          <li>Built responsive UI components using <span class="hl">HTML, CSS, JavaScript, and jQuery</span> for client-facing applications.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">C#</span>
+          <span class="chip">.NET Core</span>
+          <span class="chip">MVC</span>
+          <span class="chip">REST API</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">HTML/CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Education</div>
+
+      <div class="edu">
+        <div class="edu-left">
+          <div class="edu-deg">B.Tech — Information Technology</div>
+          <div class="edu-school">B. H. Gardi College of Engineering &amp; Technology</div>
+        </div>
+        <div class="edu-right">
+          <span class="edu-cgpa">8.50</span>
+          <span class="edu-yr">CGPA · 2020–2023</span>
+        </div>
+      </div>
+
+      <div class="edu">
+        <div class="edu-left">
+          <div class="edu-deg">Diploma — Information Technology</div>
+          <div class="edu-school">Government Polytechnic Rajkot</div>
+        </div>
+        <div class="edu-right">
+          <span class="edu-cgpa">7.80</span>
+          <span class="edu-yr">CGPA · 2017–2020</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="side">
+
+    <div class="sec">
+      <div class="sec-title">Core Skills</div>
+
+      <div class="skill-row">
+        <span class="skill-name">C# / .NET</span>
+        <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+        <span class="skill-pct">95%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">ASP.NET Core</span>
+        <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+        <span class="skill-pct">90%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">SQL Server</span>
+        <div class="skill-track"><div class="skill-fill" style="width:88%"></div></div>
+        <span class="skill-pct">88%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Entity Framework</span>
+        <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        <span class="skill-pct">85%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">REST APIs</span>
+        <div class="skill-track"><div class="skill-fill" style="width:92%"></div></div>
+        <span class="skill-pct">92%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">LINQ</span>
+        <div class="skill-track"><div class="skill-fill" style="width:82%"></div></div>
+        <span class="skill-pct">82%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">JavaScript</span>
+        <div class="skill-track"><div class="skill-fill" style="width:76%"></div></div>
+        <span class="skill-pct">76%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">HTML / CSS</span>
+        <div class="skill-track"><div class="skill-fill" style="width:78%"></div></div>
+        <span class="skill-pct">78%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Git</span>
+        <div class="skill-track"><div class="skill-fill" style="width:85%"></div></div>
+        <span class="skill-pct">85%</span>
+      </div>
+
+      <div class="chips" style="margin-top:1.2rem;">
+        <span class="chip">MVC Architecture</span>
+        <span class="chip">Payment Gateways</span>
+        <span class="chip">AI API Integration</span>
+        <span class="chip">Agile / Scrum</span>
+        <span class="chip">Debugging</span>
+        <span class="chip">Code Review</span>
+        <span class="chip">jQuery</span>
+        <span class="chip">WhatsApp API</span>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Certifications</div>
+
+      <div class="cert">
+        <div class="cert-icon">🤖</div>
+        <div>
+          <div class="c-link" href="https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww.cloudskillsboost.google%2Fpublic_profiles%2F21370a2d-a653-4e72-b110-2bc1a319ca00%2Fbadges%2F8306060%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin%26utm_campaign%3Dql-social-share&urlhash=ryMq&mt=KkqfyGlJBrpk2lsmBBCvwFZe64BcvkNfpG_SqJ1KLninjcL6vrlIuU88IUvJCTRAMZaTHhBjQIdcGf5wu7UVuCGG6jY&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bdpnqj6FhSwmPeBXEaarkeQ%3D%3D">Introduction to Generative AI</div>
+          <div class="cert-by">Google · Mar 2024</div>
+        </div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-icon">🧠</div>
+        <div>
+          <div class="c-link" href="https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww.cloudskillsboost.google%2Fpublic_profiles%2F21370a2d-a653-4e72-b110-2bc1a319ca00%2Fbadges%2F8305979%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin%26utm_campaign%3Dql-social-share&urlhash=3act&mt=4VbOv0iFv5rw-AcrFGv-YJzZsf9sU6NlDWyMTeQqPz1FNveiY905ocx23mboRLOLyXpDvmjhUoVr-EbEk4brRCpkATo&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bdpnqj6FhSwmPeBXEaarkeQ%3D%3D">Introduction to Large Language Models</div>
+          <div class="cert-by">Google · Mar 2024</div>
+        </div>
+      </div>
+
+      <div class="cert">
+        <div class="cert-icon">⚖️</div>
+        <div>
+          <div class="c-link" href="https://www.linkedin.com/safety/go/?url=https%3A%2F%2Fwww.cloudskillsboost.google%2Fpublic_profiles%2F21370a2d-a653-4e72-b110-2bc1a319ca00%2Fbadges%2F8305637%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin%26utm_campaign%3Dql-social-share&urlhash=oKmf&mt=sWnTKiUGIxv2jmG0hkDARzGoDiIUpJNJUvCgPmfCeeadiojLggh2dizAxGyKRvenvBhrRCpRPY-b3NUcEfOPcbiH7F4&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3B9ZUg8ZBJS2m5zUB0EAomcw%3D%3D">Introduction to Responsible AI</div>
+          <div class="cert-by">Google · Mar 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Recognition</div>
+
+      <div class="award">
+        <div class="award-top">
+          <span class="award-icon">🏆</span>
+          <span class="award-name">Best Physics Project — 2nd Place</span>
+        </div>
+        <div class="award-meta">Dr. Paresh Kotak · Jan 2024</div>
+        <div class="award-desc">Ranked 2nd among 150+ teams at Govt. Polytechnic Rajkot for building a solar power generator that lit a lamp and charged a live smartphone.</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Interests</div>
+      <div class="tags">
+        <span class="tag">Adventure Travel</span>
+        <span class="tag">Road Trips</span>
+        <span class="tag">Mountains</span>
+        <span class="tag">Beaches</span>
+        <span class="tag">Streaming</span>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+</div>
+</body>
+</html>
